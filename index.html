@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico de Transações</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Gráfico de Transações do Mês Atual</h1>
+    <canvas id="transacoesChart" width="400" height="200"></canvas>
+    <script>
+        fetch('contagem_transacoes.json')
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.getElementById('transacoesChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie', // ou 'bar' para gráfico de barras
+                    data: {
+                        labels: ['Aprovadas', 'Canceladas', 'Desfeitas'],
+                        datasets: [{
+                            label: 'Transações',
+                            data: [data.APPR, data.DEVOL, data.REFD],
+                            backgroundColor: ['#36a2eb', '#ff6384', '#ffce56']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        return tooltipItem.label + ': ' + tooltipItem.raw;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+    </script>
+</body>
+</html>
