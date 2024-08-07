@@ -1,8 +1,8 @@
 <?php
 
 // Dados de autenticação
-$email = "suporte.tec@ceopag.com.br";
-$password = "vjs#5465lkfvjlkfds@!";
+$email = "Login Portal";
+$password = "senha Portal";
 
 // Endpoint da API para autenticação
 $url_auth = 'https://api.movingpay.com.br/api/v3/acessar';
